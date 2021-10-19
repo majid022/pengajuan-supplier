@@ -1,0 +1,34 @@
+
+    
+<table border="1" cellpadding="5">
+  <thead>
+    <tr style="background-color: green">
+      <th width="50">NO</th>
+      <th width="200">NAMA REQUESTER</th>
+      <th width="200">Asal SBU</th>
+      <th width="100">TANGGAL PENGAJUAN</th>
+      <th width="200">DESKRIPSI ITEM</th>
+      <th width="200">JENIS ITEM</th>
+      <th width="100">SATUAN</th>
+      <th width="100">HARGA ITEM</th>
+      <th width="150">DESKRIPSI COA</th>
+      <th width="200">COA</th>
+      <th width="100">JENIS ITEM COA</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr>
+      <td>1</td>
+      <td>RAHAYU NINDA</td>
+      <td>PT. HADJI KALLA</td>
+      <td>2019-08-22</td>
+      <td>ROTAN KAYU</td>
+      <td>JASA</td>
+      <td>Sheet</td>
+      <td>6000</td>
+      <td>Kas</td>
+      <td>1111101</td>
+      <td>LAINNYA</td>
+    </tr>
+    </tbody>
+</table> 

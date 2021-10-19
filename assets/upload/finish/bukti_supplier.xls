@@ -1,0 +1,62 @@
+
+    
+<table border="1" cellpadding="5">
+  <thead>
+    <tr style="background-color: yellow">
+      <th width="50">No</th>
+      <th width="200">Nama Requester</th>
+      <th width="200">Asal SBU</th>
+      <th width="100">Tanggal Pengajuan</th>
+      <th width="300">Kategori Supplier</th>
+      <th width="200">Alternate Name</th>
+      <th width="100">Nama Supplier</th>
+      <th width="150">Nomor KTP</th>
+      <th width="150">Nomor NPWP</th>
+      <th width="350">Alamat</th>
+      <th width="100">Nama</th>
+      <th width="200">Nomor Telephone kantor</th>
+      <th width="200">Nomor Telephone</th>
+      <th width="200">Email</th>
+      <th width="300">Nomor lialibity</th>
+    </tr>
+  </thead>
+  <tbody>
+            <tr>
+          <td>1</td>
+          <td>AHMAD MUHTADIN</td>
+          <td>PT. BUMI SARANA UTAMA</td>
+          <td>2019-08-10</td>
+          <td>BISNIS UNIT KALLA GROUP</td>
+          <td>AFP</td>
+          <td>NIHLA</td>
+          <td>'2147483647111111</td>
+          <td>'214748364711222</td>
+          <td>H. YASIN LIMPO, ROMANG POLONG, SAMATA, GOWA, </td>
+          <td>ANDI AKBAR</td>
+          <td>'+625666</td>
+          <td>'0852417466695</td>
+          <td>NURLISAH46@GMAIL.COM</td>
+          <td>421.103.110102.112.1111102.B014.312.000</td>
+        </tr>
+              <tr>
+          <td>2</td>
+          <td>HERLNA</td>
+          <td>PT. BUMI SARANA UTAMA</td>
+          <td>2019-08-10</td>
+          <td>BISNIS UNIT KALLA GROUP</td>
+          <td>AFP</td>
+          <td>NIHLA</td>
+          <td>'2147483647111111</td>
+          <td>'2147483647222222</td>
+          <td>H. YASIN LIMPO, ROMANG POLONG, SAMATA, GOWA,92767</td>
+          <td>ANDI AKBAR A</td>
+          <td>'+625666</td>
+          <td>'0852417466695</td>
+          <td>NURLISAH46@GMAIL.COM</td>
+          <td>421.103.110102.112.1111102.B014.312.000</td>
+        </tr>
+        </tbody>
+</table> 
+<?
+ob_end_clean();
+?>
