@@ -231,48 +231,94 @@
                             <span>Profil</span>
                         </a>
                     </li>
-                    <li class="<?php if ($this->uri->segment(2) == "suplier" || $this->uri->segment(2) == "item") {
-                                    echo "active";
-                                } ?>">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">view_list</i>
-                            <span>Pengajuan</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li class="<?php if ($this->uri->segment(2) == "suplier") {
-                                            echo "active";
-                                        } ?>">
-                                <a href="<?= base_url('user/suplier') ?>">Supplier</a>
-                            </li>
-                            <li class="<?php if ($this->uri->segment(2) == "item") {
-                                            echo "active";
-                                        } ?>">
-                                <a href="<?= base_url('user/item') ?>">Item</a>
-                            </li>
+                    <?php if($this->session->userdata('level-user') == 1) : ?>
+                        <li class="<?php if ($this->uri->segment(2) == "suplier" || $this->uri->segment(2) == "item") {
+                                        echo "active";
+                                    } ?>">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">view_list</i>
+                                <span>Pengajuan</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li class="<?php if ($this->uri->segment(2) == "suplier") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/suplier') ?>">Supplier</a>
+                                </li>
+                                <li class="<?php if ($this->uri->segment(2) == "item") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/item') ?>">Item</a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li class="<?php if ($this->uri->segment(2) == "approval" || $this->uri->segment(2) == "approval_item") {
-                                    echo "active";
-                                } ?>">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">list</i>
-                            <span>Approval</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li class="<?php if ($this->uri->segment(2) == "approval") {
-                                            echo "active";
-                                        } ?>">
-                                <a href="<?= base_url('user/approval') ?>">Supplier</a>
-                            </li>
-                            <li class="<?php if ($this->uri->segment(2) == "approval_item") {
-                                            echo "active";
-                                        } ?>">
-                                <a href="<?= base_url('user/approval_item') ?>">Item</a>
-                            </li>
+                            </ul>
+                        </li>
 
-                        </ul>
-                    </li>
+                        <li class="<?php if ($this->uri->segment(2) == "approval" || $this->uri->segment(2) == "approval_item") {
+                                        echo "active";
+                                    } ?>">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">list</i>
+                                <span>Approval</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li class="<?php if ($this->uri->segment(2) == "approval") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/approval') ?>">Supplier</a>
+                                </li>
+                                <li class="<?php if ($this->uri->segment(2) == "approval_item") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/approval_item') ?>">Item</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    <?php else : ?>
+                        <li class="<?php if ($this->uri->segment(2) == "approval" || $this->uri->segment(2) == "approval_item") {
+                                        echo "active";
+                                    } ?>">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">list</i>
+                                <span>Approval Suplier</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li class="<?php if ($this->uri->segment(3) == "wait_for_approve") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/approval/wait_for_approve') ?>">Waiting For Approve</a>
+                                </li>
+                                <li class="<?php if ($this->uri->segment(3) == "has_approved") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/approval/has_approved') ?>">Has Approve</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="<?php if ($this->uri->segment(2) == "suplier" || $this->uri->segment(2) == "approval_item") {
+                                        echo "active";
+                                    } ?>">
+                            <a href="javascript:void(0);" class="menu-toggle">
+                                <i class="material-icons">list</i>
+                                <span>Approval Item</span>
+                            </a>
+                            <ul class="ml-menu">
+                                <li class="<?php if ($this->uri->segment(3) == "wait_for_approve") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/suplier/wait_for_approve') ?>">Waiting For Approve</a>
+                                </li>
+                                <li class="<?php if ($this->uri->segment(3) == "has_approved") {
+                                                echo "active";
+                                            } ?>">
+                                    <a href="<?= base_url('user/suplier/has_approved') ?>">Has Approve</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    <?php endif ?>
                 <?php }
                 ?>
                 <li>

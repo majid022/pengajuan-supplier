@@ -21,13 +21,13 @@
                                 </li>
                             </ul> -->
                         </div>
-                        <form action="<?=base_url('admin/item/multipel_item')?>" method="post">
+                        <form action="<?=base_url('user/suplier/approve_multi')?>" method="post">
                         <div class="body">
                              <div class="row">
                                 <div class="col-md-12">
-                                    <input style="padding: 5px" type="submit" name="setuju" value="Setujui" class="btn btn-success ">
-                                    <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
-                                    <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink ">
+                                    <?php if($allow_approved) : ?>
+                                        <input style="padding: 5px" type="submit" name="setuju" value="Setujui" class="btn btn-success ">
+                                    <?php endif ?>
                                 </div>
                             </div>
                             <div class="">
@@ -75,8 +75,10 @@
                                         <tr>
                                             <td><?=$no++?></td>
                                             <td>
-                                                <input type="checkbox" id="basic_checkbox_<?=$ik++?>" name="item[]" value="<?=$i->id_item?>" class="filled-in">
-                                                <label for="basic_checkbox_<?=$ip++?>"></label>
+                                                <?php if($allow_approved && $i->status == '0') : ?>
+                                                    <input type="checkbox" id="basic_checkbox_<?=$ik?>" name="item[]" value="<?=$i->id_item?>" class="filled-in">
+                                                    <label for="basic_checkbox_<?=$ik?>"></label>
+                                                <?php endif ?>
                                                 </form>
                                             </td>
                                             <td>
@@ -108,20 +110,16 @@
                                             <td><?=strtoupper($i->jenis_item )?></td>
                                             <td><?=$i->satuan ?></td>
                                             <td align="center">
-                                                <a type="button" href="<?=base_url('admin/item/edit_item/'.$i->id_item)?>" class="btn bg-cyan btn-circle waves-effect waves-circle waves-float">
+                                                <a type="button" href="<?=base_url('user/suplier/detail/'.$i->id_item)?>" class="btn bg-cyan btn-circle waves-effect waves-circle waves-float">
                                                    <i class="material-icons">edit</i>
                                                </a>
-                                                <button type="button" onclick="hapus(<?=$i->id_item?>)" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                   <i class="material-icons">delete</i>
-                                               </button>
-
                                             </td>
                                             <td><?=$i->harga ?></td>
                                             <td><?=$i->des_coa ?></td>
                                             <td><?=$i->coa ?></td>
                                             <td><?=$i->jenis_item_coa ?></td>
                                         </tr>
-                                    <?php }?>
+                                    <?php $ik++; }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -137,41 +135,4 @@
         $("#message").fadeOut();
         }
      setInterval(time,5000);
-     function hapus(id_item){
-        swal({
-                title: "Apa anda yakin ??",
-                text: "Data yang di hapus tidak akan kembali !",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#17c0eb',
-                confirmButtonText: 'Ya !',
-                cancelButtonText: "Batal !"
-            }).then((result)=>{
-                if(result.value){
-                    $.ajax({
-                    url:  "<?php echo site_url('admin/item/hapus') ?>",
-                    type: "post",
-                    data: {
-                        id_item:id_item
-                    },
-                    success:function(){
-                        swal("Berhasil!", "Data Telah Dihapus !", "success",).
-                        then((value)=>{
-                        if(value){
-                            location.reload();
-                        }else{
-                           alert('Gagal Menghapus Data');
-                        }
-                    });
-
-                      //  departement.reload();
-                    },error:function(){
-                        alert('Gagal Menghapus Data');
-                    }
-                });
-                }else{
-                     
-                }
-            });
-    }
 </script>

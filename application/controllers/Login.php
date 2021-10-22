@@ -33,8 +33,8 @@ class Login extends CI_Controller {
 					'id_admin'		=> $row->id_admin,
 					'foto' 			=> $row->foto,
 					'sidebar' 		=> 'admin',
-					'akses' 		=> $row->akses,
-				);
+					// 'akses' 		=> $row->akses,
+					);
 			
 			$this->session->set_userdata($data_session);
 			redirect('admin/beranda','refresh');
@@ -58,6 +58,7 @@ class Login extends CI_Controller {
 						'branch' 		=> $ro->branch,
 						'departement' 	=> $ro->departement,
 						'sidebar'		=> 'user',
+						'level-user' => (int)$ro->level_user
 					);
 				$qad = $cekki->row();
 				if($username == $qad->username && $password == $qad->password){

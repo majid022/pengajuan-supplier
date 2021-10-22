@@ -149,4 +149,10 @@ class Model_pengajuan extends CI_Model
 
 		return $this->db->get()->num_rows();
 	}
+
+	public function all($tableName, $condition)
+	{
+		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
+		return $this->db->get_where($tableName, $condition)->result();
+	}
 }

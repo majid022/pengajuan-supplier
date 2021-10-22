@@ -6,6 +6,7 @@ class Suplier extends CI_Controller {
  		parent::__construct();
  		$this->load->library('template');
  		$this->load->model('Model_pengajuan');
+ 		$this->load->model('Model_item');
  		if ($this->session->userdata('status') != 'login') {
 				redirect(base_url("login"));
 		}
@@ -441,8 +442,84 @@ class Suplier extends CI_Controller {
 			}
 		    $this->load->view('admin/view_cetak_excel',['hasil' => $data]);
  		}
-			
-
 	}
- }
- ?>
+
+	public function wait_for_approve()
+	{
+		$data['lisa']['title_h']        = 'Admin | Data Pengajuan Item';
+		$data['item'] = $this->Model_item->edit_data(['status' => 0], 'tb_item')->result();
+		$data['allow_approved'] = true;
+		$this->template->view('user/sup-wait-for-approve',$data);
+	}
+
+	public function detail($id)
+	{
+		$data['lisa']['title_h']        = 'Detail Data Pengajuan Item';
+ 		$data['usaha']                  = $this->Model_item->tampil_data('tb_usaha');
+ 		$data['sbu']					= $this->Model_item->tampil_data('tb_sbu');
+ 		$data['des_coa']				= $this->Model_item->tampil_data('tb_account');
+ 		$data['satuan']					= $this->Model_item->tampil_data('tb_satuan');
+ 		$where = array(
+				'id_item' => $id,
+		);
+
+		$data['item'] = $this->Model_item->edit_data($where,'tb_item')->row();
+
+ 		$this->template->view('user/detail-sup',$data);
+	}
+
+	public function do_approved($id)
+	{
+		if($this->session->userdata('level-user') == 2)
+    		$by = 2;
+    	else 
+    		$by = 3;
+		$this->Model_item->update_data(['id_item' => $id], ['status' => 1, 'approve_by' => $by], 'tb_item');
+		redirect(['user/suplier/detail/'.$id]);
+	}
+
+	public function approve_multi()
+	{
+		if($this->session->userdata('level-user') == 2)
+    		$by = 2;
+    	else 
+    		$by = 3;
+		if($this->input->post('setuju')){
+			$id_item = $this->input->post('item');
+			if(is_null($id_item)){
+	 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                                Tidak ada data pengajuan item yang dipilih
+	                            </div>');
+				redirect('user/suplier/wait_for_approve');
+	 		}
+			else if(is_array($id_item)||is_object($id_item)){
+				foreach($id_item as $item){
+					$data = array(
+						'status'=>'1',
+						'approve_by' => $by
+					);
+					$where = array(
+						'id_item' =>$item
+					);
+
+					$this->Model_item->update_data($where,$data,'tb_item');
+				}
+				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                Data pengajuan item telah disetujui
+                            </div>');
+					redirect('user/suplier/wait_for_approve');
+
+			}
+		}
+	}
+
+	public function has_approved()
+	{
+		$data['lisa']['title_h']        = 'Admin | Data Pengajuan Item';
+		$data['item'] = $this->Model_item->edit_data(['status' => 1], 'tb_item')->result();
+		$data['allow_approved'] = false;
+		$this->template->view('user/sup-wait-for-approve',$data);
+	}
+}?>

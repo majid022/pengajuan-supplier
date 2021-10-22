@@ -69,7 +69,9 @@ class Supplier extends CI_Controller
 			{
 			    foreach($id_pengajuan as $row){
 					$data 		= array(
-						'id_pengajuan' => $row, 'status'=>1
+						'id_pengajuan' => $row, 
+						'status'=>1,
+						'approve_by' => 1
 					);
 					$where = array(
 						'id_pengajuan'=>$row
