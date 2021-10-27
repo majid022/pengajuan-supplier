@@ -15,8 +15,7 @@ class Approval_item extends CI_Controller
 	function index(){
 		$data['lisa']['title_h']        = 'Approval Pengajuan Item';
 		$par_id = $this->session->userdata("id_user");
-		$id_user = array('id_user'=> $par_id);
-		$data['item'] = $this->Model_item->tampil_approval($id_user);
+		$data['item'] = $this->Model_item->hasApprove($par_id);
 		$this->template->view('user/view_approved_item',$data);
 	}
 	
@@ -137,6 +136,18 @@ class Approval_item extends CI_Controller
                             </div>');
 			redirect('user/approval_item');
 		}
+    }
+
+    public function detailItem($id)
+    {
+    	$model = $this->Model_item->detail('tb_item', ['id_item' => $id])->row();
+    	$data = [
+    		'model' => $model,
+    		'lisa' => [
+    			'title_h' => 'Detai Item'
+    		]
+    	];
+    	$this->template->view('user/detail-item',$data);
     }
 }
 ?>

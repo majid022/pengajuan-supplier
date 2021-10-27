@@ -14,7 +14,7 @@ class Item extends CI_Controller {
  		$data['lisa']['title_h']        = 'Pengajuan Item';
  		$par_id = $this->session->userdata("id_user");
 		$id_user = array('id_user'=> $par_id);
-		$data['item'] = $this->Model_item->tampil_pengajuan($id_user);
+		$data['item'] = $this->Model_item->waiting($id_user);
  		$this->template->view('user/view_item',$data);
  	}
  	function tambah_item(){

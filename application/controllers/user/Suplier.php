@@ -15,7 +15,7 @@ class Suplier extends CI_Controller {
  		$data['lisa']['title_h']        = 'Pengajuan Supplier';
  		$par_id = $this->session->userdata("id_user");
 		$id_user = array('id_user'=> $par_id);
-		$data['suplier'] = $this->Model_pengajuan->tampil_pengajuan($id_user);
+		$data['suplier'] = $this->Model_pengajuan->waiting($id_user);
  		$this->template->view('user/view_suplier',$data);
  	}
  	function tambah_suplier(){

@@ -163,7 +163,7 @@ class Item extends CI_Controller
  		}
  		echo json_encode(['respon' => $respon]);
  	}
- 	public function hapus($id_item){
+ 	public function hapus($id_item = null){
         $id_item = $this->input->post('id_item');
         $this->Model_item->delete_by_id($id_item);
     }

@@ -48,11 +48,11 @@ class Approval_item extends CI_Controller
 			{
 				$gbr = $this->upload->data();
 				$data  = array(
-							'id_app_item'   => $id_app_item,
-							'tgl_acc'      => $tgl_acc,
-							'file_acc'     => $gbr['file_name'],
-							'status1'		  => '1',
-						);
+					'id_app_item'   => $id_app_item,
+					'tgl_acc'      => $tgl_acc,
+					'file_acc'     => $gbr['file_name'],
+					'status1'		  => '1',
+				);
 			}
 		}
 		else

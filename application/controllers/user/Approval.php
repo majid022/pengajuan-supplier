@@ -15,8 +15,7 @@ class Approval extends CI_Controller
 	function index(){
 		$data['lisa']['title_h']        = 'Approval Pengajuan Supplier';
 		$par_id = $this->session->userdata("id_user");
-		$id_user = array('id_user'=> $par_id);
-		$data['pengajuan'] = $this->Model_pengajuan->tampil_approval($id_user);
+		$data['pengajuan'] = $this->Model_pengajuan->hasApprove($par_id);
 		$this->template->view('user/view_approved_pengajuan',$data);
 	}
 	function tambah(){
@@ -218,6 +217,14 @@ class Approval extends CI_Controller
 				redirect('user/approval/wait_for_approve');
 			}
 		}
+    }
+
+    public function detailSuplier($id)
+    {
+    	$model = $this->Model_pengajuan->detailSuplier('tb_pengajuan', ['id_pengajuan' => $id]);
+    	$data['lisa']['title_h'] = 'Detail Supplier';
+    	$data['model'] = $model;
+    	$this->template->view('user/detail-suplier', $data);
     }
 }
 ?>

@@ -1,7 +1,6 @@
 <?php
 class Model_pengajuan extends CI_Model
 {
-
 	function tampil_data($table)
 	{
 		return $this->db->get($table)->result();
@@ -72,14 +71,40 @@ class Model_pengajuan extends CI_Model
 		$this->db->where($id_user);
 		return $this->db->get()->result();
 	}
+
+	function waiting($id_user)
+	{
+		$this->db->from('tb_pengajuan');
+		$this->db->join('tb_user', 'tb_user.id_user=tb_pengajuan.user_id');
+		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
+		$this->db->join('tb_usaha', 'tb_usaha.kode_usaha=tb_pengajuan.usaha');
+		$this->db->order_by('id_pengajuan', 'asc');
+		$this->db->where($id_user);
+		$this->db->where(['status' => 0]);
+		$this->db->or_where(['status_finance' => 0]);
+		$this->db->or_where(['status_procurement' => 0]);
+		return $this->db->get()->result();
+	}
+
 	function tampil_approval($id_user)
 	{
-		$this->db->from('tb_approved_supplier');
-		$this->db->join('tb_user', 'tb_user.id_user=tb_approved_supplier.user_id');
-		$this->db->order_by('id_app_sup', 'asc');
+		$this->db->from('tb_pengajuan');
+		$this->db->join('tb_user', 'tb_user.id_user=tb_pengajuan.user_id');
+		$this->db->order_by('tgl_pembuatan', 'asc');
 		$this->db->where($id_user);
 		return $this->db->get()->result();
 	}
+
+	function hasApprove($id_user)
+	{
+		$this->db->from('tb_pengajuan');
+		$this->db->join('tb_user', 'tb_user.id_user=tb_pengajuan.user_id');
+		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
+		$this->db->order_by('tgl_pembuatan', 'asc');
+		$this->db->where(['id_user' => $id_user, 'status' => 1, 'status_finance' => 1, 'status_procurement' => 1]);
+		return $this->db->get()->result();
+	}
+
 	public function delete_by_id($id_pengajuan)
 	{
 		$this->db->where('id_pengajuan', $id_pengajuan);
@@ -154,5 +179,13 @@ class Model_pengajuan extends CI_Model
 	{
 		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
 		return $this->db->get_where($tableName, $condition)->result();
+	}
+
+	public function detailSuplier($table, $condition)
+	{
+		$this->db->from($table);
+		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
+		$this->db->where($condition);
+		return $this->db->get()->row();
 	}
 }
