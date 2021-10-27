@@ -83,19 +83,7 @@
                                             </td>
                                             <td>
                                                 <?php if ($i->status=='1') : ?>
-                                                    <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI by. 
-                                                        <?php
-                                                            if($i->approve_by == '1') {
-                                                                echo 'Admin';
-                                                            }
-                                                            elseif($i->approve_by == '2') {
-                                                                echo 'Finance';
-                                                            }
-                                                            elseif($i->approve_by == '3') {
-                                                                echo 'Procurement';
-                                                            }
-                                                        ?>
-                                                    </button>
+                                                    <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI
 
                                                 <?php elseif($i->status == '0') : ?>
                                                     <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
