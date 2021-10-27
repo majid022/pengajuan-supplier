@@ -18,81 +18,90 @@
                          <div class="table-responsive">
                              <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                  <thead>
-                                     <tr>
-                                         <th>No</th>
-                                         <th>Status</th>
-                                         <th>Nama</th>
-                                         <th>Branch</th>
-                                         <th>File Bukti Approval</th>
-                                         <th>Tanggal Pengajuan</th>
-                                         <th>File Bukti Penyelesaian Approval</th>
-                                         <th>Tanggal Penyelesaikan</th>
-                                         <th>Aksi</th>
-                                     </tr>
-                                 </thead>
-                                 <tfoot>
-                                     <tr>
-                                         <th>No</th>
-                                         <th>Status</th>
-                                         <th>Nama</th>
-                                         <th>Branch</th>
-                                         <th>File Bukti Approval</th>
-                                         <th>Tanggal Pengajuan</th>
-                                         <th>File Bukti Penyelesaian Approval</th>
-                                         <th>Tanggal Penyelesaian</th>
-                                         <th>Aksi</th>
-                                     </tr>
-                                 </tfoot>
-                                 <tbody>
-                                     <?php $no = 1;
-                                        foreach ($pengajuan as $p) {
-                                        ?>
-                                         <tr>
-                                             <td><?= $no++ ?></td>
-                                             <td>
-                                                 <?php if ($p->status1 == '1') { ?>
-                                                     <button style=" padding : 5px !important" href="" type="submit" class="btn btn-success ">Proses selesai</button>
-                                                 <?php } else { ?>
-                                                     <button style=" padding : 5px !important" href="" type="submit" class="btn btn-warning ">Menunggu proses</button>
-                                                 <?php } ?>
-                                             </td>
-                                             <td><?= $p->first_name ?> <?= $p->last_name ?></td>
-                                             <td><?= $p->branch ?></td>
-                                             <td>
-                                                 <?php $ext = pathinfo($p->file_diajukan, PATHINFO_EXTENSION) ?>
-                                                 <?php if ($ext == 'pdf') { ?>
-                                                     <a class="nav-link" href="<?= base_url('assets/upload/pengajuan/' . $p->file_diajukan) ?>" target="blank">
-                                                         <i class="fa fa-file-pdf-o" style="font-size: 30px"></i>
-                                                     </a>
-                                                 <?php } else { ?>
-                                                     <a class="nav-link" href="<?= base_url('assets/upload/pengajuan/' . $p->file_diajukan) ?>" target="blank">
-                                                         <i class="fa fa-file-picture-o" style="font-size: 30px"></i>
-                                                     </a>
-                                                 <?php } ?>
-                                             </td>
-                                             <td><?= $p->tgl_pengajuan ?> </td>
-                                             <td>
-                                                 <?php if ($p->status1 == '1') { ?>
-                                                     <a class="nav-link" href="<?= base_url('assets/upload/finish/' . $p->file_acc) ?>" target="blank">
-                                                         <i class="fa fa-file-excel-o" style="font-size: 30px"></i>
-                                                     </a>
-                                                 <?php } else { ?>
-                                                     <i class="fa fa-clock-o" style="font-size: 30px"></i>
-                                                 <?php } ?>
-                                             </td>
-                                             <td><?= $p->tgl_acc ?> </td>
-                                             <td align="center">
-                                                 <a type="button" href="<?= base_url('admin/approval_supplier/edit/' . $p->id_app_sup) ?>" class="btn bg-cyan btn-circle waves-effect waves-circle waves-float">
-                                                     <i class="material-icons">add</i>
-                                                 </a>
-                                                 <button type="button" onclick="hapus(<?= $p->id_app_sup ?>)" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                     <i class="material-icons">delete</i>
-                                                 </button>
-
-                                             </td>
-                                         </tr>
-                                     <?php } ?>
-                                 </tbody>
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>Status by Admin</th>
+                                            <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
+                                            <th>Nama Requester</th>
+                                            <th>Asal SBU</th>
+                                            <th>Tanggal Daftar</th>
+                                            <th>Kategori Supplier</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>Status by Admin</th>
+                                            <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
+                                            <th>Nama Requester</th>
+                                            <th>Asal SBU</th>
+                                            <th>Tanggal Daftar</th>
+                                            <th>Kategori Supplier</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($pengajuan as $key) : ?>
+                                            <tr>
+                                                <td><?= $i ?></td>
+                                                <td>
+                                                    <?php if ($key->status=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_selesai ?></button>
+                                                         <?php } ?>
+                                                         <?php if ($key->status=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($key->status=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_selesai ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($key->status_finance=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_finance ?> </button>
+                                                         <?php } ?>
+                                                         <?php if ($key->status_finance=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($key->status_finance=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_finance ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($key->status_procurement=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_procurementd ?></button>
+                                                         <?php } ?>
+                                                         <?php if ($key->status_procurement=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($key->status_procurement=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_procurementd ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?= $key->nama_requester ?>
+                                                </td>
+                                                <td>
+                                                    <?= $key->asal_sbu ?>
+                                                </td>
+                                                <td>
+                                                    <?= $key->tgl_pembuatan ?>
+                                                </td>
+                                                <td>
+                                                    <?= $key->kategori_nama ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('admin/approval_supplier/detailSuplier/'.$key->id_pengajuan) ?>" class="btn btn-success ">
+                                                        Detail
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php $i++; ?>
+                                        <?php endforeach ?>
+                                    </tbody>
                              </table>
                          </div>
                      </div>

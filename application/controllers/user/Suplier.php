@@ -522,4 +522,12 @@ class Suplier extends CI_Controller {
 		$data['allow_approved'] = false;
 		$this->template->view('user/sup-wait-for-approve',$data);
 	}
+
+	public function detailSuplier($id)
+	{
+		$model = $this->Model_pengajuan->detailSuplier('tb_pengajuan', ['id_pengajuan' => $id]);
+    	$data['lisa']['title_h'] = 'Detail Supplier';
+    	$data['model'] = $model;
+    	$this->template->view('user/detail-pengajuan-suplier', $data);
+	}
 }?>

@@ -240,5 +240,17 @@ class Item extends CI_Controller
 			redirect('admin/item');
 		}
  	}
+
+ 	public function detailItem($id)
+ 	{
+ 		$model = $this->Model_item->detail('tb_item', ['id_item' => $id])->row();
+ 		$data = [
+ 			'model' => $model,
+ 			'lisa' => [
+ 				'title_h' => 'Detail Item'
+ 			]
+ 		];
+ 		$this->template->view('admin/detail-pengajuan-item',$data);
+ 	}
 }
 ?>

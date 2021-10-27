@@ -14,7 +14,7 @@ class Approval_supplier extends CI_Controller
 	}
 	function index(){
 		$data['lisa']['title_h']        = 'Admin | Approval Pengajuan Supplier';
-		$data['pengajuan'] = $this->Model_pengajuan->tampil_app_supplier();
+		$data['pengajuan'] = $this->Model_pengajuan->hasApprove();
 		$this->template->view('admin/view_approval_pengajuan',$data);
 	}
 	public function hapus($id_app_sup){
@@ -81,6 +81,14 @@ class Approval_supplier extends CI_Controller
                             </div>');
 			redirect('user/approval_supplier');
 		}
+    }
+
+    public function detailSuplier($id)
+    {
+    	$model = $this->Model_pengajuan->detailSuplier('tb_pengajuan', ['id_pengajuan' => $id]);
+    	$data['lisa']['title_h'] = 'Detail Supplier';
+    	$data['model'] = $model;
+    	$this->template->view('user/detail-suplier', $data);
     }
 }
 ?>

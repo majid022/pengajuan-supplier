@@ -5,6 +5,9 @@
 			return $this->db->get($table)->result();
 		}
 		function tampil_item($table){
+			$this->db->where(['status' => 0]);
+			$this->db->or_where(['status_finance' => 0]);
+			$this->db->or_where(['status_procurement' => 0]);
 			$this->db->order_by('id_item','asc');
 			return $this->db->get($table)->result();
 		}
@@ -90,12 +93,15 @@
 			return $this->db->get();
 		}
 
-		public function hasApprove($id_user)
+		public function hasApprove($id_user = null)
 		{
 			$this->db->from('tb_item');
 			$this->db->join('tb_user','tb_user.id_user=tb_item.user_id');
 			$this->db->order_by('tgl_pe','asc');
-			$this->db->where(['user_id' => $id_user, 'status' => 1, 'status_finance' => 1, 'status_procurement' => 1]);
+			if (!is_null($id_user)) {
+				$this->db->where(['user_id' => $id_user]);
+			}
+			$this->db->where(['status' => 1, 'status_finance' => 1, 'status_procurement' => 1]);
 			return $this->db->get()->result();
 		}
 	}

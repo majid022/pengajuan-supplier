@@ -421,5 +421,17 @@ class Supplier extends CI_Controller
  		}
  		echo json_encode(['respon' => $respon]);
  	}
+
+ 	public function detailSuplier($id)
+ 	{
+ 		$model = $this->Model_pengajuan->detailSuplier('tb_pengajuan', ['id_pengajuan' => $id]);
+ 		$data = [
+ 			'model' => $model,
+ 			'lisa' => [
+ 				'title_h' => 'Detail Supplier'
+ 			]
+ 		];
+ 		$this->template->view('admin/detail-pengajuan-suplier',$data);
+ 	}
 }
 ?>

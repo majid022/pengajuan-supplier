@@ -34,38 +34,26 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>NO</th>
+                                            <th>No</th>
                                             <th></th>
-                                            <th>Status</th>
+                                            <th>Status by Admin</th>
+                                            <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
-                                            <th>Tanggal Pengajuan</th>
-                                            <th>Deskripsi ITEM</th>
-                                            <th>Jenis ITEM</th>
-                                            <th>Satuan</th>
-                                            <th>Aksi</th>
-                                            <th>Harga ITEM</th>
-                                            <th>Deskripsi COA</th>
-                                            <th>COA</th>
-                                            <th>Jenis ITEM COA</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>NO</th>
+                                            <th>No</th>
                                             <th></th>
-                                            <th>Status</th>
+                                            <th>Status by Admin</th>
+                                            <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
-                                            <th>Tanggal Pengajuan</th>
-                                            <th>Deskripsi ITEM</th>
-                                            <th>Jenis ITEM</th>
-                                            <th>Satuan</th>
-                                            <th>Aksi</th>
-                                            <th>Harga ITEM</th>
-                                            <th>Deskripsi COA</th>
-                                            <th>COA</th>
-                                            <th>Jenis ITEM COA</th>
+                                            <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -80,46 +68,49 @@
                                                 </form>
                                             </td>
                                             <td>
-                                                <?php if ($i->status=='1') : ?>
-                                                    <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI by. 
-                                                        <?php
-                                                            if($i->approve_by == '1') {
-                                                                echo 'Admin';
-                                                            }
-                                                            elseif($i->approve_by == '2') {
-                                                                echo 'Finance';
-                                                            }
-                                                            elseif($i->approve_by == '3') {
-                                                                echo 'Procurement';
-                                                            }
-                                                        ?>
-                                                    </button>
-
-                                                <?php elseif($i->status == '0') : ?>
-                                                    <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                                <?php elseif($i->status == '2') : ?>
-                                                    <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
-                                                <?php endif ?>
-                                            </td>
-                                            <td><?=strtoupper($i->nama_re)?></td>
-                                            <td><?=strtoupper($i->asal_sbu)?></td>
-                                            <td><?=$i->tgl_pe?></td>
-                                            <td><?=strtoupper($i->des_item )?></td>
-                                            <td><?=strtoupper($i->jenis_item )?></td>
-                                            <td><?=$i->satuan ?></td>
-                                            <td align="center">
-                                                <a type="button" href="<?=base_url('admin/item/edit_item/'.$i->id_item)?>" class="btn bg-cyan btn-circle waves-effect waves-circle waves-float">
-                                                   <i class="material-icons">edit</i>
-                                               </a>
-                                                <button type="button" onclick="hapus(<?=$i->id_item?>)" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
-                                                   <i class="material-icons">delete</i>
-                                               </button>
-
-                                            </td>
-                                            <td><?=$i->harga ?></td>
-                                            <td><?=$i->des_coa ?></td>
-                                            <td><?=$i->coa ?></td>
-                                            <td><?=$i->jenis_item_coa ?></td>
+                                                    <?php if ($i->status=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $i->tgl_selesai ?></button>
+                                                         <?php } ?>
+                                                         <?php if ($i->status=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($i->status=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $i->tgl_selesai ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($i->status_finance=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $i->tgl_finance ?> </button>
+                                                         <?php } ?>
+                                                         <?php if ($i->status_finance=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($i->status_finance=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $i->tgl_finance ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($i->status_procurement=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $i->tgl_procurementd ?></button>
+                                                         <?php } ?>
+                                                         <?php if ($i->status_procurement=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($i->status_procurement=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $i->tgl_procurementd ?></button>
+                                                         <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?= $i->nama_re ?>
+                                                </td>
+                                                <td>
+                                                    <?= $i->asal_sbu ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('admin/item/detailItem/'.$i->id_item) ?>" class="btn btn-success ">
+                                                        Detail
+                                                    </a>
+                                                </td>
                                         </tr>
                                     <?php }?>
                                     </tbody>

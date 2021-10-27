@@ -15,7 +15,7 @@ class Approval_item extends CI_Controller
 	function index(){
 		$data['lisa']['title_h']        = 'Approval Pengajuan Item';
 		$par_id = $this->session->userdata("id_user");
-		$data['item'] = $this->Model_item->hasApprove($par_id);
+		$data['item'] = $this->Model_item->hasApprove();
 		$this->template->view('user/view_approved_item',$data);
 	}
 	
