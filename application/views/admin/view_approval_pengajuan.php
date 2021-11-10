@@ -14,97 +14,119 @@
                              DATA APPROVAL PENGAJUAN SUPPLIER
                          </h2>
                      </div>
-                     <div class="body">
-                         <div class="table-responsive">
-                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                 <thead>
-                                        <tr>
-                                            <th>NO</th>
-                                            <th>Status by Admin</th>
-                                            <th>Status by Finance</th>
-                                            <th>Status by Procurement</th>
-                                            <th>Nama Requester</th>
-                                            <th>Asal SBU</th>
-                                            <th>Tanggal Daftar</th>
-                                            <th>Kategori Supplier</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>NO</th>
-                                            <th>Status by Admin</th>
-                                            <th>Status by Finance</th>
-                                            <th>Status by Procurement</th>
-                                            <th>Nama Requester</th>
-                                            <th>Asal SBU</th>
-                                            <th>Tanggal Daftar</th>
-                                            <th>Kategori Supplier</th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php $i = 1; ?>
-                                        <?php foreach ($pengajuan as $key) : ?>
-                                            <tr>
-                                                <td><?= $i ?></td>
-                                                <td>
-                                                    <?php if ($key->status=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_selesai ?></button>
-                                                         <?php } ?>
-                                                         <?php if ($key->status=='0') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                                         <?php } ?>
-                                                          <?php if ($key->status=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_selesai ?></button>
-                                                         <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <?php if ($key->status_finance=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_finance ?> </button>
-                                                         <?php } ?>
-                                                         <?php if ($key->status_finance=='0') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                                         <?php } ?>
-                                                          <?php if ($key->status_finance=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_finance ?></button>
-                                                         <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <?php if ($key->status_procurement=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_procurementd ?></button>
-                                                         <?php } ?>
-                                                         <?php if ($key->status_procurement=='0') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                                         <?php } ?>
-                                                          <?php if ($key->status_procurement=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_procurementd ?></button>
-                                                         <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <?= $key->nama_requester ?>
-                                                </td>
-                                                <td>
-                                                    <?= $key->asal_sbu ?>
-                                                </td>
-                                                <td>
-                                                    <?= $key->tgl_pembuatan ?>
-                                                </td>
-                                                <td>
-                                                    <?= $key->kategori_nama ?>
-                                                </td>
-                                                <td>
-                                                    <a href="<?= base_url('admin/approval_supplier/detailSuplier/'.$key->id_pengajuan) ?>" class="btn btn-success ">
-                                                        Detail
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php $i++; ?>
-                                        <?php endforeach ?>
-                                    </tbody>
-                             </table>
-                         </div>
+                     <form action="<?=base_url('admin/supplier/multipel_supplier/1')?>" method="post">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
+                                    <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink ">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="table-responsive">
+                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                         <thead>
+                                                <tr>
+                                                    <th>NO</th>
+                                                    <th></th>
+                                                    <th>Status by Admin</th>
+                                                    <th>Status by Finance</th>
+                                                    <th>Status by Procurement</th>
+                                                    <th>Nama Requester</th>
+                                                    <th>Asal SBU</th>
+                                                    <th>Tanggal Daftar</th>
+                                                    <th>Kategori Supplier</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>NO</th>
+                                                    <th></th>
+                                                    <th>Status by Admin</th>
+                                                    <th>Status by Finance</th>
+                                                    <th>Status by Procurement</th>
+                                                    <th>Nama Requester</th>
+                                                    <th>Asal SBU</th>
+                                                    <th>Tanggal Daftar</th>
+                                                    <th>Kategori Supplier</th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <?php 
+                                                    $i = 1;
+                                                    $ik=1;
+                                                    $ip=1;
+                                                ?>
+
+                                                <?php foreach ($pengajuan as $key) : ?>
+                                                    <tr>
+                                                        <td><?= $i ?></td>
+                                                        <td>
+                                                            <input type="checkbox" id="basic_checkbox_<?=$ik++?>" name="pengajuan[]" value="<?=$key->id_pengajuan?>" class="filled-in">
+                                                            <label for="basic_checkbox_<?=$ip++?>"></label>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($key->status=='1') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_selesai ?></button>
+                                                                 <?php } ?>
+                                                                 <?php if ($key->status=='0') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                                 <?php } ?>
+                                                                  <?php if ($key->status=='2') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_selesai ?></button>
+                                                                 <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($key->status_finance=='1') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_finance ?> </button>
+                                                                 <?php } ?>
+                                                                 <?php if ($key->status_finance=='0') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                                 <?php } ?>
+                                                                  <?php if ($key->status_finance=='2') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_finance ?></button>
+                                                                 <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php if ($key->status_procurement=='1') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $key->tgl_procurementd ?></button>
+                                                                 <?php } ?>
+                                                                 <?php if ($key->status_procurement=='0') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                                 <?php } ?>
+                                                                  <?php if ($key->status_procurement=='2') { ?>
+                                                                 <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $key->tgl_procurementd ?></button>
+                                                                 <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $key->nama_requester ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $key->asal_sbu ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $key->tgl_pembuatan ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $key->kategori_nama ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<?= base_url('admin/approval_supplier/detailSuplier/'.$key->id_pengajuan) ?>" class="btn btn-success ">
+                                                                Detail
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php $i++; ?>
+                                                <?php endforeach ?>
+                                            </tbody>
+                                     </table>
+                                 </div>
+                            </div>
                      </div>
+                     </form>
                  </div>
              </div>
          </div>

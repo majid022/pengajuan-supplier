@@ -23,7 +23,6 @@ class Login extends CI_Controller {
 		if($cek->num_rows() > 0){
 			foreach ($cek->result() as $row)
 			{
-
 				$data_session = array(
 					'username' 		=> $username,
 					'password'		=> $password,

@@ -139,7 +139,12 @@ class Approval extends CI_Controller
 
     public function wait_for_approve()
     {
-    	$model = $this->Model_pengajuan->all('tb_pengajuan', ['status' => 0]);
+    	if ($this->session->userdata('level-user') == 2) {
+    		$model = $this->Model_pengajuan->all('tb_pengajuan', ['status' => 1, 'status_finance' => 0]);
+    	}
+    	else {
+    		$model = $this->Model_pengajuan->all('tb_pengajuan', ['status' => 1, 'status_procurement' => 0]);	
+    	}
     	$data['lisa']['title_h']        = 'Approval Pengajuan Supplier';
     	$data['suplier'] = $model;
     	$data['allow_approved'] = true;
@@ -167,7 +172,12 @@ class Approval extends CI_Controller
 
     public function has_approved()
     {
-    	$model = $this->Model_pengajuan->all('tb_pengajuan', ['status' => 1]);
+    	if ($this->session->userdata('level-user') == 2) {
+    		$model = $this->Model_pengajuan->db->where(['status' => 1, 'status_finance' => 1])->or_where(['status_finance' => 2])->get('tb_pengajuan')->result();
+    	}
+    	else {
+    		$model = $this->Model_pengajuan->where(['status' => 1, 'status_procurement' => 1])->or_where(['status_procurement' => 2])->get('tb_pengajuan')->result();
+    	}
     	$data['lisa']['title_h']        = 'Approval Pengajuan Supplier';
     	$data['suplier'] = $model;
     	$data['allow_approved'] = false;
@@ -184,7 +194,7 @@ class Approval extends CI_Controller
     	redirect(['user/approval/detail/'.$id]);
     }
 
-    public function approve_multi()
+    public function approve_multi($afterAcc = null)
     {
     	if($this->input->post('setuju')){
 			$id_pengajuan = $this->input->post('pengajuan');
@@ -193,28 +203,128 @@ class Approval extends CI_Controller
 	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 	                                Tidak ada data pengajuan supplier yang dipilih
 	                            </div>');
-				redirect('user/approval/wait_for_approve');
+	 				if (is_null($afterAcc)) {
+						redirect('user/approval/wait_for_approve');
+	 				}
+	 				else {
+						redirect('user/approval/has_approved');
+	 				}
  		    }
-			else if (is_array($id_pengajuan) || is_object($id_pengajuan)){
-			    if($this->session->userdata('level-user') == 2)
-		    		$by = 2;
-		    	else 
-		    		$by = 3;
+			else if (is_array($id_pengajuan) || is_object($id_pengajuan))
+			{
 			    foreach($id_pengajuan as $row){
-					$data 		= array(
-						'id_pengajuan' => $row, 'status'=>1, 'approve_by' => $by
-					);
+					if($this->session->userdata('level-user') == 2) {
+						$data = array(
+							'id_pengajuan' => $row, 
+							'status_finance' => 1,
+							'tgl_selesai' => date('Y-m-d'),
+						);
+					}
+					else {
+						$data = array(
+							'id_pengajuan' => $row, 
+							'status_procurement' => 1,
+							'tgl_selesai' => date('Y-m-d'),
+						);
+					}
 					$where = array(
-						'id_pengajuan'=>$row
-					);
+						'id_pengajuan' => $row,
+						'status' => 1,
+						'status_finance' => 0
+					);	
 					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
-					
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                 Data pengajuan supplier telah disetujui
                             </div>');
 				redirect('user/approval/wait_for_approve');
+
+			}
+		}
+		elseif($this->input->post('tidak')){
+			$id_pengajuan = $this->input->post('pengajuan');
+			
+				if(is_null($id_pengajuan)){
+	 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                                Tidak ada data pengajuan supplier yang dipilih
+	                            </div>');
+	 				if (is_null($afterAcc)) {
+						redirect('user/approval/wait_for_approve');
+	 				}
+	 				else {
+	 					redirect('user/approval/has_approved');
+	 				}
+	 		    }
+				else if (is_array($id_pengajuan) || is_object($id_pengajuan))
+				{
+				    foreach($id_pengajuan as $row){
+						if($this->session->userdata('level-user') == 2) {
+							$data = array(
+								'id_pengajuan' => $row, 
+								'status_finance' => 2,
+								'tgl_selesai' => date('Y-m-d'),
+							);
+						}
+						else {
+							$data = array(
+								'id_pengajuan' => $row, 
+								'status_procurement' => 2,
+								'tgl_selesai' => date('Y-m-d'),
+							);
+						}
+						$where = array(
+							'id_pengajuan'=>$row,
+							'status' => 1,
+							'status_finance' => 1
+						);
+						$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+
+						$dataku = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+						
+					}
+					$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                               Data pengajuan supplier tidak disetujui
+                            </div>');
+
+					if (is_null($afterAcc)) {
+						redirect('user/approval/wait_for_approve');
+	 				}
+	 				else {
+	 					redirect('user/approval/has_approved');
+	 				}
+				}
+		}
+		elseif($this->input->post('cetak')){
+
+			$id_pengajuan = $this->input->post('pengajuan');
+			if(is_null($id_pengajuan)){
+ 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                Tidak ada data pengajuan supplier yang dipilih
+                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/approval/wait_for_approve');
+ 				}
+ 				else {
+					redirect('user/approval/has_approved');
+ 				}
+ 		    }
+			else{
+				$fg = [];
+					$data = [];
+				if(is_array($id_pengajuan)||is_object($id_pengajuan)){
+					foreach($id_pengajuan as $row){
+						$where = array(
+							'id_pengajuan' => $row
+						);
+					  	$fg['pengajuan'] = $this->Model_pengajuan->cetak_multipel($where)->result();
+						$data[] = $fg;
+					}
+				}
+			    $this->load->view('admin/view_cetak_excel',['hasil' => $data]);
 			}
 		}
     }

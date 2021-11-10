@@ -14,7 +14,7 @@ class Approval_supplier extends CI_Controller
 	}
 	function index(){
 		$data['lisa']['title_h']        = 'Admin | Approval Pengajuan Supplier';
-		$data['pengajuan'] = $this->Model_pengajuan->hasApprove();
+		$data['pengajuan'] = $this->Model_pengajuan->hasApproveByAdmin();
 		$this->template->view('admin/view_approval_pengajuan',$data);
 	}
 	public function hapus($id_app_sup){

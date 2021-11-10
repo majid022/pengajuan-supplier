@@ -104,5 +104,10 @@
 			$this->db->where(['status' => 1, 'status_finance' => 1, 'status_procurement' => 1]);
 			return $this->db->get()->result();
 		}
+
+		public function db()
+		{
+			return $this->db;
+		}
 	}
 ?>

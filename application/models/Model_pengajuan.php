@@ -27,8 +27,8 @@ class Model_pengajuan extends CI_Model
 		$this->db->join('tb_usaha', 'tb_usaha.kode_usaha=tb_pengajuan.usaha');
 		$this->db->order_by('id_pengajuan', 'asc');
 		$this->db->where(['status' => 0]);
-		$this->db->or_where(['status_finance' => 0]);
-		$this->db->or_where(['status_procurement' => 0]);
+		// $this->db->or_where(['status_finance' => 0]);
+		// $this->db->or_where(['status_procurement' => 0]);
 		return $this->db->get();
 	}
 	function tampil_app_supplier()
@@ -108,6 +108,20 @@ class Model_pengajuan extends CI_Model
 			$this->db->where(['id_user' => $id_user]);
 		}
 		$this->db->where(['status' => 1, 'status_finance' => 1, 'status_procurement' => 1]);
+		return $this->db->get()->result();
+	}
+
+	function hasApproveByAdmin($id_user = null)
+	{
+		$this->db->from('tb_pengajuan');
+		$this->db->join('tb_user', 'tb_user.id_user=tb_pengajuan.user_id');
+		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
+		$this->db->order_by('tgl_pembuatan', 'asc');
+		if (!is_null($id_user)) {
+			$this->db->where(['id_user' => $id_user]);
+		}
+		$this->db->where(['status' => 1]);
+		$this->db->or_where(['status' => 2]);
 		return $this->db->get()->result();
 	}
 
@@ -193,5 +207,10 @@ class Model_pengajuan extends CI_Model
 		$this->db->join('tb_kategori', 'tb_kategori.alternate=tb_pengajuan.kategori');
 		$this->db->where($condition);
 		return $this->db->get()->row();
+	}
+
+	public function db()
+	{
+		return $this->db;
 	}
 }

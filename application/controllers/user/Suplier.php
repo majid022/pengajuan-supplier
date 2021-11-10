@@ -420,34 +420,145 @@ class Suplier extends CI_Controller {
 			redirect('user/suplier');
 		}
 	}
-	function multipel_supplier(){
-		$id_pengajuan = $this->input->post('pengajuan');
-		if(is_null($id_pengajuan)){
- 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                Tidak ada data pengajuan supplier yang dipilih
-                            </div>');
-			redirect('user/suplier');
- 		}else{
- 			$fg = [];
-				$data = [];
-			if(is_array($id_pengajuan)||is_object($id_pengajuan)){
-				foreach($id_pengajuan as $row){
-					$where = array(
-						'id_pengajuan' => $row
-					);
-				  	$fg['pengajuan'] = $this->Model_pengajuan->cetak_multipel($where)->result();
-					$data[] = $fg;
+	function multipel_supplier($afterAcc = null){
+		if($this->input->post('setuju')){
+			$id_item = $this->input->post('item');
+			if(is_null($id_item)){
+	 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                                Tidak ada data pengajuan item yang dipilih
+	                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/suplier/wait_for_approve');
 				}
+				else {
+					redirect('user/suplier/has_approved');
+				}
+	 		}
+			else if(is_array($id_item)||is_object($id_item)){
+				foreach($id_item as $item){
+					if($this->session->userdata('level-user') == 2) {
+						$data = array(
+							'status'=> 1,
+							'status_finance' => 1,
+							'tgl_finance' => date('Y-m-d')
+						);
+					}
+					else {
+						$data = array(
+							'status'=> 1,
+							'status_procurement' => 1,
+							'tgl_procurementd' => date('Y-m-d')
+						);
+					}
+					$where = array(
+						'id_item' =>$item
+					);
+					$this->Model_item->update_data($where,$data,'tb_item');
+				}
+				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                Data pengajuan item telah disetujui
+                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/suplier/wait_for_approve');
+				}
+				else {
+					redirect('user/suplier/has_approved');
+				}
+
 			}
-		    $this->load->view('admin/view_cetak_excel',['hasil' => $data]);
- 		}
+		}
+		elseif($this->input->post('tidak')){
+			$id_item = $this->input->post('item');
+			if(is_null($id_item)){
+	 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                                Tidak ada data pengajuan item yang dipilih
+	                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/suplier/wait_for_approve');
+				}
+				else {
+					redirect('user/suplier/has_approved');
+				}
+	 		}
+			else if(is_array($id_item)||is_object($id_item)){
+				foreach($id_item as $item){
+					if($this->session->userdata('level-user') == 2) {
+						$data = array(
+							'status'=> 1,
+							'status_finance' => 2,
+							'tgl_finance' => date('Y-m-d')
+						);
+					}
+					else {
+						$data = array(
+							'status'=> 1,
+							'status_procurement' => 2,
+							'tgl_procurementd' => date('Y-m-d')
+						);
+					}
+					$where = array(
+						'id_item' =>$item,
+						'status' => 1
+					);
+
+					$this->Model_item->update_data($where,$data,'tb_item');
+				}
+				$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                               Data pengajuan item tidak disetujui
+                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/suplier/wait_for_approve');
+				}
+				else {
+					redirect('user/suplier/has_approved');
+				}
+
+			}
+		}
+		elseif ($this->input->post('cetak')) {
+			$id_item = $this->input->post('item');
+			if(is_null($id_item)){
+	 			$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                                Tidak ada data pengajuan item yang dipilih
+	                            </div>');
+				if (is_null($afterAcc)) {
+					redirect('user/suplier/wait_for_approve');
+				}
+				else {
+					redirect('user/suplier/has_approved');
+				}
+	 		}else{
+				$fg = [];
+					$data = [];
+				if(is_array($id_item)||is_object($id_item)){
+					foreach($id_item as $item){
+						$where = array(
+							'id_item' => $item
+						);
+					  	$fg['item'] = $this->Model_item->cetak_multivel($where)->result();
+						$data[] = $fg;
+					}
+				}
+			    $this->load->view('admin/view_cetak',['hasil' => $data]);
+			}
+		}
 	}
 
 	public function wait_for_approve()
 	{
 		$data['lisa']['title_h']        = 'Admin | Data Pengajuan Item';
-		$data['item'] = $this->Model_item->edit_data(['status' => 0], 'tb_item')->result();
+		if ($this->session->userdata('level-user') == 2) {
+			$data['item'] = $this->Model_item->db->where(['status' => 1, 'status_finance' => 0])->get('tb_item')->result();
+		}
+		else {
+			$data['item'] = $this->Model_item->db->where(['status' => 1, 'status_procurement' => 0])->get('tb_item')->result();
+		}
+		// $data['item'] = $this->Model_item->edit_data(['status' => 0], 'tb_item')->result();
 		$data['allow_approved'] = true;
 		$this->template->view('user/sup-wait-for-approve',$data);
 	}
@@ -529,5 +640,16 @@ class Suplier extends CI_Controller {
     	$data['lisa']['title_h'] = 'Detail Supplier';
     	$data['model'] = $model;
     	$this->template->view('user/detail-pengajuan-suplier', $data);
+	}
+
+	public function detailItem($id)
+	{
+		$this->Model_item->db()->where(['id_item' => $id]);
+		$this->Model_item->db()->join('tb_account','tb_account.kode_account=tb_item.des_coa');
+
+		$model = $this->Model_item->db()->get('tb_item')->row();
+    	$data['lisa']['title_h'] = 'Detail Item';
+    	$data['model'] = $model;
+    	$this->template->view('admin/detail-pengajuan-item', $data);
 	}
 }?>

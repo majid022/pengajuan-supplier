@@ -15,8 +15,6 @@ class Supplier extends CI_Controller
 	function index(){
 		$sql = "UPDATE tb_pengajuan set notif=0 ";
 		$this->db->query($sql);
-
-
 		$data['lisa']['title_h']        = 'Admin | Data Pengajuan Supplier';
 		$data['suplier'] = $this->Model_pengajuan->pengajuan()->result();
 		$this->template->view('admin/view_pengajuan_supplier',$data);
@@ -55,7 +53,7 @@ class Supplier extends CI_Controller
 			redirect('admin/supplier');
 		}
 	}
-	function multipel_supplier(){
+	function multipel_supplier($afterAcc = null){
 		if($this->input->post('setuju')){
 			$id_pengajuan = $this->input->post('pengajuan');
 			if(is_null($id_pengajuan)){
@@ -68,14 +66,14 @@ class Supplier extends CI_Controller
 			else if (is_array($id_pengajuan) || is_object($id_pengajuan))
 			{
 			    foreach($id_pengajuan as $row){
-					$data 		= array(
+					$data = array(
 						'id_pengajuan' => $row, 
-						'status'=>1,
-						'approve_by' => 1
+						'status' => 1,
+						'tgl_selesai' => date('Y-m-d'),
 					);
 					$where = array(
-						'id_pengajuan'=>$row
-					);
+						'id_pengajuan' => $row,
+					);	
 					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 					
 				}
@@ -95,28 +93,40 @@ class Supplier extends CI_Controller
 	                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 	                                Tidak ada data pengajuan supplier yang dipilih
 	                            </div>');
-				redirect('admin/supplier');
+	 				if (is_null($afterAcc)) {
+						redirect('admin/supplier');
+	 				}
+	 				else {
+	 					redirect('admin/approval_supplier');
+	 				}
 	 		    }
 				else if (is_array($id_pengajuan) || is_object($id_pengajuan))
 				{
 				    foreach($id_pengajuan as $row){
-					$data 		= array(
-						'id_pengajuan' => $row, 'status'=>2
-					);
-					$where = array(
-						'id_pengajuan'=>$row
-					);
-					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+						$data 		= array(
+							'id_pengajuan' => $row,
+							'status' => 2
+						);
+						$where = array(
+							'id_pengajuan'=>$row,
+							'status' => 1
+						);
+						$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 
-					$dataku = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
-					
-				}
-				$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
+						$dataku = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+						
+					}
+					$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                Data pengajuan supplier tidak disetujui
                             </div>');
-					redirect('admin/supplier','refresh');
-			}
+					if (is_null($afterAcc)) {
+						redirect('admin/supplier');
+	 				}
+	 				else {
+	 					redirect('admin/approval_supplier');
+	 				}
+				}
 		}
 		elseif($this->input->post('cetak')){
 
