@@ -176,7 +176,7 @@ class Approval extends CI_Controller
     		$model = $this->Model_pengajuan->db->where(['status' => 1, 'status_finance' => 1])->or_where(['status_finance' => 2])->get('tb_pengajuan')->result();
     	}
     	else {
-    		$model = $this->Model_pengajuan->where(['status' => 1, 'status_procurement' => 1])->or_where(['status_procurement' => 2])->get('tb_pengajuan')->result();
+    		$model = $this->Model_pengajuan->db->where(['status' => 1, 'status_procurement' => 1])->or_where(['status_procurement' => 2])->get('tb_pengajuan')->result();
     	}
     	$data['lisa']['title_h']        = 'Approval Pengajuan Supplier';
     	$data['suplier'] = $model;
