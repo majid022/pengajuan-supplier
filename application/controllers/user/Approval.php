@@ -219,6 +219,11 @@ class Approval extends CI_Controller
 							'status_finance' => 1,
 							'tgl_selesai' => date('Y-m-d'),
 						);
+						$where = array(
+							'id_pengajuan' => $row,
+							'status' => 1,
+							'status_finance' => 0
+						);	
 					}
 					else {
 						$data = array(
@@ -226,12 +231,12 @@ class Approval extends CI_Controller
 							'status_procurement' => 1,
 							'tgl_selesai' => date('Y-m-d'),
 						);
+						$where = array(
+							'id_pengajuan' => $row,
+							'status' => 1,
+							'status_procurement' => 0
+						);
 					}
-					$where = array(
-						'id_pengajuan' => $row,
-						'status' => 1,
-						'status_finance' => 0
-					);	
 					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
@@ -266,6 +271,11 @@ class Approval extends CI_Controller
 								'status_finance' => 2,
 								'tgl_selesai' => date('Y-m-d'),
 							);
+							$where = array(
+								'id_pengajuan'=>$row,
+								'status' => 1,
+								'status_finance' => 1
+							);
 						}
 						else {
 							$data = array(
@@ -273,12 +283,12 @@ class Approval extends CI_Controller
 								'status_procurement' => 2,
 								'tgl_selesai' => date('Y-m-d'),
 							);
+							$where = array(
+								'id_pengajuan'=>$row,
+								'status' => 1,
+								'status_procurement' => 1
+							);
 						}
-						$where = array(
-							'id_pengajuan'=>$row,
-							'status' => 1,
-							'status_finance' => 1
-						);
 						$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 
 						$dataku = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
