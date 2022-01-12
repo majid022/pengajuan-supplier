@@ -188,6 +188,7 @@ class Approval extends CI_Controller
     {
     	if($this->session->userdata('level-user') == 2)
     		$by = 2;
+    		// $data = ['status' => 1, 'approve_by' => 2, ''];
     	else 
     		$by = 3;
     	$this->Model_pengajuan->update_data(['id_pengajuan' => $id], ['status' => 1, 'approve_by' => $by], 'tb_pengajuan');
@@ -217,24 +218,22 @@ class Approval extends CI_Controller
 						$data = array(
 							'id_pengajuan' => $row, 
 							'status_finance' => 1,
-							'tgl_selesai' => date('Y-m-d'),
+							'tgl_finance' => date('Y-m-d'),
 						);
 						$where = array(
 							'id_pengajuan' => $row,
 							'status' => 1,
-							'status_finance' => 0
 						);	
 					}
 					else {
 						$data = array(
 							'id_pengajuan' => $row, 
 							'status_procurement' => 1,
-							'tgl_selesai' => date('Y-m-d'),
+							'tgl_procurementd' => date('Y-m-d'),
 						);
 						$where = array(
 							'id_pengajuan' => $row,
 							'status' => 1,
-							'status_procurement' => 0
 						);
 					}
 					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
@@ -269,7 +268,7 @@ class Approval extends CI_Controller
 							$data = array(
 								'id_pengajuan' => $row, 
 								'status_finance' => 2,
-								'tgl_selesai' => date('Y-m-d'),
+								'tgl_finance' => date('Y-m-d'),
 							);
 							$where = array(
 								'id_pengajuan'=>$row,
@@ -281,12 +280,11 @@ class Approval extends CI_Controller
 							$data = array(
 								'id_pengajuan' => $row, 
 								'status_procurement' => 2,
-								'tgl_selesai' => date('Y-m-d'),
+								'tgl_procurementd' => date('Y-m-d'),
 							);
 							$where = array(
 								'id_pengajuan'=>$row,
 								'status' => 1,
-								'status_procurement' => 1
 							);
 						}
 						$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');

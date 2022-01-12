@@ -122,7 +122,7 @@
                                                     <?= $s->kategori_nama ?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('admin/supplier/detailSuplier/'.$s->id_pengajuan) ?>" class="btn btn-success ">
+                                                    <a href="<?= base_url('user/suplier/detailSuplier/'.$s->id_pengajuan) ?>" class="btn btn-success ">
                                                         Detail
                                                     </a>
                                                 </td>

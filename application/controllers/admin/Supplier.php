@@ -105,7 +105,8 @@ class Supplier extends CI_Controller
 				    foreach($id_pengajuan as $row){
 						$data 		= array(
 							'id_pengajuan' => $row,
-							'status' => 2
+							'status' => 2,
+							'tgl_selesai' => date('Y-m-d'),
 						);
 						$where = array(
 							'id_pengajuan'=>$row,

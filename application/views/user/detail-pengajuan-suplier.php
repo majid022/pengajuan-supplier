@@ -7,6 +7,7 @@
                         <h2><?= $lisa['title_h'] ?></h2>
                     </div>
                     <div class="body">
+                        <?php if($this->session->userdata('level') == 1) :  ?>
                         <p>
                             <a href="<?=base_url('user/suplier/edit_suplier/'.$model->id_pengajuan)?>" class="btn bg-cyan btn-circle waves-effect waves-circle waves-float">
                                 <i class="material-icons">edit</i>
@@ -15,6 +16,7 @@
                                 <i class="material-icons">delete</i>
                             </button>
                         </p>
+                        <?php endif ?>
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
