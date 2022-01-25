@@ -44,7 +44,6 @@
                                             <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
-                                            <th>Tanggal Daftar</th>
                                             <th>Kategori Supplier</th>
                                             <th></th>
                                         </tr>
@@ -58,7 +57,6 @@
                                             <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
-                                            <th>Tanggal Daftar</th>
                                             <th>Kategori Supplier</th>
                                             <th></th>
                                         </tr>
@@ -114,9 +112,6 @@
                                                 </td>
                                                 <td>
                                                     <?= $s->asal_sbu ?>
-                                                </td>
-                                                <td>
-                                                    <?= $s->tgl_pembuatan ?>
                                                 </td>
                                                 <td>
                                                     <?= $s->kategori_nama ?>
