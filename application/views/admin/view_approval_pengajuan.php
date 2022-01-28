@@ -27,6 +27,7 @@
                                      <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                          <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>NO</th>
                                                     <th></th>
                                                     <th>Status by Admin</th>
@@ -36,11 +37,12 @@
                                                     <th>Asal SBU</th>
                                                     <th>Tanggal Daftar</th>
                                                     <th>Kategori Supplier</th>
-                                                    <th></th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
+                                                    <th></th>
                                                     <th>NO</th>
                                                     <th></th>
                                                     <th>Status by Admin</th>
@@ -50,7 +52,7 @@
                                                     <th>Asal SBU</th>
                                                     <th>Tanggal Daftar</th>
                                                     <th>Kategori Supplier</th>
-                                                    <th></th>
+                                                    
                                                 </tr>
                                             </tfoot>
                                             <tbody>
@@ -62,6 +64,11 @@
 
                                                 <?php foreach ($pengajuan as $key) : ?>
                                                     <tr>
+                                                        <td>
+                                                            <a href="<?= base_url('admin/approval_supplier/detailSuplier/'.$key->id_pengajuan) ?>" class="btn btn-success ">
+                                                                Detail
+                                                            </a>
+                                                        </td>
                                                         <td><?= $i ?></td>
                                                         <td>
                                                             <input type="checkbox" id="basic_checkbox_<?=$ik++?>" name="pengajuan[]" value="<?=$key->id_pengajuan?>" class="filled-in">
@@ -112,11 +119,6 @@
                                                         </td>
                                                         <td>
                                                             <?= $key->kategori_nama ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="<?= base_url('admin/approval_supplier/detailSuplier/'.$key->id_pengajuan) ?>" class="btn btn-success ">
-                                                                Detail
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 <?php $i++; ?>
