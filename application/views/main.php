@@ -55,7 +55,10 @@
                                     $sql = "SELECT notif FROM tb_pengajuan where notif='1' ";
                                     $query = $this->db->query($sql)->num_rows('notif');
 
-                                    echo $query;
+                                    $sql_itm = "SELECT * FROM tb_item where status='0' ";
+                                    $query_itm = $this->db->query($sql_itm)->num_rows('status');
+
+                                    echo $query + $query_itm;
                                 ?>
                             </span>
                         </a>
@@ -69,12 +72,44 @@
                                                 <i class="material-icons">person_add</i>
                                             </div>
                                             <div class="menu-info">
-                                                <h4><?php echo $query;?> Pengajuan Supplier baru</h4>
+                                                <h4><?php echo $query;?> Pengajuan Supplier Baru</h4>
                                                 <p>
                                                     <i class="material-icons">access_time</i> 
                                                     <?php
                                                         $sql1 = "SELECT tgl_pembuatan FROM tb_pengajuan where notif='1' ";
                                                         $query1 = $this->db->query($sql1)->row('tgl_pembuatan');
+
+                                                        $waktuawal  = date_create($query1); //waktu di setting
+
+                                                        $waktuakhir = date_create(); //2019-02-21 09:35 waktu sekarang
+
+                                                        $diff  = date_diff($waktuawal, $waktuakhir);
+
+                                                        echo 'Dikirim: ';
+                                                        if ( $diff->d==0) {
+                                                             echo  'Hari Ini';
+                                                        }else{
+                                                             echo $diff->d .' Hari Lalu';
+                                                        }
+
+                                                        ?>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a  href="<?php echo base_url('admin/item/')?>">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><?php echo $query_itm;?> Pengajuan Item Baru</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 
+                                                    <?php
+                                                        $sql1 = "SELECT tgl_pe FROM tb_item where status='0' ";
+                                                        $query1 = $this->db->query($sql1)->row('tgl_pe');
 
                                                         $waktuawal  = date_create($query1); //waktu di setting
 

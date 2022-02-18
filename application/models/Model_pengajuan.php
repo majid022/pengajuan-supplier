@@ -57,7 +57,12 @@ class Model_pengajuan extends CI_Model
 	function update_data($where, $data, $table)
 	{
 		$this->db->where($where);
-		return $this->db->update($table, $data);
+		$this->db->update($table, $data);
+
+		$this->db->from('tb_pengajuan');
+		$this->db->join('tb_user', 'tb_user.id_user=tb_pengajuan.user_id');
+		$this->db->where($where);
+		return $this->db->get()->result_array();
 	}
 	function hapus_data($where, $tabel)
 	{
