@@ -23,13 +23,13 @@
                                     <th>Status by Admin</th>
                                     <td>
                                         <?php if ($model->status=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $model->tgl_selesai ?></button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                              <?php } ?>
                                              <?php if ($model->status=='0') { ?>
                                              <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                              <?php } ?>
                                               <?php if ($model->status=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $model->tgl_selesai ?></button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                              <?php } ?>
                                     </td>
                                 </tr>
@@ -37,13 +37,13 @@
                                     <th>Status by Finance</th>
                                     <td>
                                         <?php if ($model->status_finance=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $model->tgl_finance ?> </button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                              <?php } ?>
                                              <?php if ($model->status_finance=='0') { ?>
                                              <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                              <?php } ?>
                                               <?php if ($model->status_finance=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $model->tgl_finance ?></button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                              <?php } ?>
                                     </td>
                                 </tr>
@@ -51,13 +51,13 @@
                                     <th>Status by Procurement</th>
                                     <td>
                                         <?php if ($model->status_procurement=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $model->tgl_procurementd ?></button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                              <?php } ?>
                                              <?php if ($model->status_procurement=='0') { ?>
                                              <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                              <?php } ?>
                                               <?php if ($model->status_procurement=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $model->tgl_procurementd ?></button>
+                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                              <?php } ?>
                                     </td>
                                 </tr>
@@ -77,7 +77,7 @@
                                 </tr>
                                 <tr>
                                     <th>Kategori Supplier</th>
-                                    <td><?=strtoupper($model->kategori_nama )?></td>
+                                    <td><?=strtoupper($model->kategori )?></td>
                                 </tr>
                                 <tr>
                                     <th>Alternate Name</th>

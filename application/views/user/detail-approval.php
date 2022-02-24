@@ -218,7 +218,7 @@
                                             <select disabled="true" name="kategori" id="kategori" class="form-control show-tick">
                                                 <option value="">-- Pilih Kategori --</option>
                                                 <?php foreach($kategori as $k){?>
-                                                <option value="<?=$k->alternate?>" <?php if ($k->alternate == $sup->kategori)  echo "selected" ?>><?=$k->kategori_nama?></option>
+                                                <option value="<?=$k->alternate?>" <?php if ($k->alternate == $sup->kategori)  echo "selected" ?>><?=$k->kategori?></option>
                                                 <?php }?>
                                             </select>
                                         </div>

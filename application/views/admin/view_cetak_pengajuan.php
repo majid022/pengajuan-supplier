@@ -38,7 +38,7 @@ header("Content-Disposition: attachment; filename=data_pengajuan-$tgl.xls");
           <td><?php echo strtoupper($p->nama_requester )?></td>
           <td><?php echo strtoupper($p->asal_sbu) ?></td>
           <td><?php echo $p->tgl_pembuatan ?></td>
-          <td><?php echo strtoupper($p->kategori_nama) ?></td>
+          <td><?php echo strtoupper($p->kategori) ?></td>
           <td><?php echo strtoupper($p->alternate) ?></td>
           <td><?php echo strtoupper($p->nama_suplier) ?></td>
           <td><?php echo "'".$p->nomor_ktp?></td>

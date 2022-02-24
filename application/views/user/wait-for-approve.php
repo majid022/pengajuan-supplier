@@ -76,35 +76,35 @@
                                             </td>
                                             <td>
                                                     <?php if ($s->status=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $s->tgl_selesai ?></button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                                          <?php } ?>
                                                          <?php if ($s->status=='0') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                                          <?php } ?>
                                                           <?php if ($s->status=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $s->tgl_selesai ?></button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                                          <?php } ?>
                                                 </td>
                                                 <td>
                                                     <?php if ($s->status_finance=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $s->tgl_finance ?> </button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                                          <?php } ?>
                                                          <?php if ($s->status_finance=='0') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                                          <?php } ?>
                                                           <?php if ($s->status_finance=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $s->tgl_finance ?></button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                                          <?php } ?>
                                                 </td>
                                                 <td>
                                                     <?php if ($s->status_procurement=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI : <?= $s->tgl_procurementd ?></button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
                                                          <?php } ?>
                                                          <?php if ($s->status_procurement=='0') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                                          <?php } ?>
                                                           <?php if ($s->status_procurement=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI : <?= $s->tgl_procurementd ?></button>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                                          <?php } ?>
                                                 </td>
                                                 <td>
@@ -114,7 +114,7 @@
                                                     <?= $s->asal_sbu ?>
                                                 </td>
                                                 <td>
-                                                    <?= $s->kategori_nama ?>
+                                                    <?= $s->kategori ?>
                                                 </td>
                                                 <td>
                                                     <a href="<?= base_url('user/suplier/detailSuplier/'.$s->id_pengajuan) ?>" class="btn btn-success ">

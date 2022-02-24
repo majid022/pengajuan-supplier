@@ -32,7 +32,7 @@ header("Content-Disposition: attachment; filename=data_pengajuan-$tgl.xls");
       foreach ($key['pengajuan'] as $p) {
              $nama_requester    = strtoupper($p->nama_requester);
              $asal_sbu          = strtoupper($p->asal_sbu);
-             $kategori          = strtoupper($p->kategori_nama);
+             $kategori          = strtoupper($p->kategori);
              $alternate         = strtoupper($p->alternate);
              $nama_suplier      = strtoupper($p->nama_suplier);
              $alamat            = strtoupper($p->alamat);
