@@ -68,7 +68,7 @@ class Profil extends CI_Controller {
 		$where = array(
 			'id_admin' => $id_admin,
 		);
-		$cek = $this->Model_item->update_data($where,$data,'tb_admin');
+		$cek = $this->Model_item->update_data_admin($where,$data,'tb_admin');
 		if($cek=1){
 			$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>

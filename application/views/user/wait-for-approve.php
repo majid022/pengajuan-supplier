@@ -30,7 +30,7 @@
                                             <input style="padding: 5px" type="submit" name="setuju" value="Setujui" class="btn btn-success ">
                                         <?php endif ?>
                                         <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
-                                        <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink ">
+                                        <!-- <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink "> -->
                                     </div>
                                 </div>
                             <div class="">

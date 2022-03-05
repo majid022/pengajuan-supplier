@@ -18,7 +18,7 @@
                         <div class="body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
+                                    <!-- <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger "> -->
                                     <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink ">
                                 </div>
                             </div>

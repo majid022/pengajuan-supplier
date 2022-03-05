@@ -111,7 +111,11 @@
                                 </td>
                             </tr>
                         </table>
-                        <a href="<?= base_url('user/approval_item/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php if($this->session->sidebar == 'admin') { ?>
+                            <a href="<?= base_url('admin/approval_item/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php } else { ?>
+                            <a href="<?= base_url('user/approval_item/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

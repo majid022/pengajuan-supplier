@@ -13,72 +13,72 @@
                                     <th>Status by Admin</th>
                                     <td>
                                         <?php if ($model->status=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
-                                             <?php } ?>
-                                             <?php if ($model->status=='0') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                             <?php } ?>
-                                              <?php if ($model->status=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
-                                             <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Status by Finance</th>
-                                    <td>
-                                        <?php if ($model->status_finance=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
-                                             <?php } ?>
-                                             <?php if ($model->status_finance=='0') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                             <?php } ?>
-                                              <?php if ($model->status_finance=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
-                                             <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Status by Procurement</th>
-                                    <td>
-                                        <?php if ($model->status_procurement=='1') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
-                                             <?php } ?>
-                                             <?php if ($model->status_procurement=='0') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                             <?php } ?>
-                                              <?php if ($model->status_procurement=='2') { ?>
-                                             <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
-                                             <?php } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Nama Requester</th>
-                                    <td>
-                                        <?= ucwords(strtolower($model->nama_requester)) ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Asal SBU</th>
-                                     <td><?=strtoupper($model->asal_sbu)?></td>
-                                </tr>
-                                <tr>
-                                    <th>Tanggal Daftar</th>
-                                    <td><?=$model->tgl_pembuatan?></td>
-                                </tr>
-                                <tr>
-                                    <th>Kategori Supplier</th>
-                                    <td><?=strtoupper($model->kategori )?></td>
-                                </tr>
-                                <tr>
-                                    <th>Alternate Name</th>
-                                    <td>
-                                        <?=strtoupper($model->alternate )?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Nama Supplier</th>
-                                    <td><?= ucwords(strtolower($model->nama_suplier)) ?></td>
-                                </tr>
+                                           <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
+                                       <?php } ?>
+                                       <?php if ($model->status=='0') { ?>
+                                           <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                       <?php } ?>
+                                       <?php if ($model->status=='2') { ?>
+                                           <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
+                                       <?php } ?>
+                                   </td>
+                               </tr>
+                               <tr>
+                                <th>Status by Finance</th>
+                                <td>
+                                    <?php if ($model->status_finance=='1') { ?>
+                                       <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
+                                   <?php } ?>
+                                   <?php if ($model->status_finance=='0') { ?>
+                                       <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                   <?php } ?>
+                                   <?php if ($model->status_finance=='2') { ?>
+                                       <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
+                                   <?php } ?>
+                               </td>
+                           </tr>
+                           <tr>
+                            <th>Status by Procurement</th>
+                            <td>
+                                <?php if ($model->status_procurement=='1') { ?>
+                                   <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
+                               <?php } ?>
+                               <?php if ($model->status_procurement=='0') { ?>
+                                   <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                               <?php } ?>
+                               <?php if ($model->status_procurement=='2') { ?>
+                                   <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
+                               <?php } ?>
+                           </td>
+                       </tr>
+                       <tr>
+                        <th>Nama Requester</th>
+                        <td>
+                            <?= ucwords(strtolower($model->nama_requester)) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Asal SBU</th>
+                        <td><?=strtoupper($model->asal_sbu)?></td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Daftar</th>
+                        <td><?=$model->tgl_pembuatan?></td>
+                    </tr>
+                    <tr>
+                        <th>Kategori Supplier</th>
+                        <td><?=strtoupper($model->kategori )?></td>
+                    </tr>
+                    <tr>
+                        <th>Alternate Name</th>
+                        <td>
+                            <?=strtoupper($model->alternate )?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nama Supplier</th>
+                        <td><?= ucwords(strtolower($model->nama_suplier)) ?></td>
+                    </tr>
                                 <!-- <tr>
                                     <th>Jenis Usaha</th>
                                     <td><?=strtoupper($model->jenis_usaha )?></td>
@@ -130,7 +130,11 @@
                                 </tr> -->
                             </thead>
                         </table>
-                        <a href="<?= base_url('user/approval/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php if($this->session->sidebar == 'admin') { ?>
+                            <a href="<?= base_url('admin/approval_supplier/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php } else { ?>
+                            <a href="<?= base_url('user/approval/') ?>" class="btn btn-primary">Kembali</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

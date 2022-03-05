@@ -37,6 +37,14 @@ class Model_item extends CI_Model{
 		return $this->db->get()->result_array();
 
 	}
+	function update_data_admin($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+		
+		// $this->db->where($where);
+		// return $this->db->get()->result_array();
+
+	}
 	function hapus_data($where,$tabel){
 		$this->db->where($where);
 		$this->db->delete($tabel);
