@@ -97,7 +97,7 @@ class Supplier extends CI_Controller
 					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Supplier Disetujui');
-					$this->email->message("Pengajuan data supplier anda untuk ".$sbu." telah disetujui oleh admin");
+					$this->email->message("Pengajuan data supplier anda telah disetujui oleh admin");
 					$this->email->send();
 				}
 
@@ -146,7 +146,7 @@ class Supplier extends CI_Controller
 					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Supplier Ditolak');
-					$this->email->message("Pengajuan data supplier anda untuk ".$sbu." tidak disetujui oleh admin");
+					$this->email->message("Pengajuan data supplier anda tidak disetujui oleh admin");
 					$this->email->send();
 
 				}

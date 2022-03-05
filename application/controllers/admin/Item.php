@@ -97,7 +97,7 @@ class Item extends CI_Controller
 					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Item Disetujui');
-					$this->email->message("Pengajuan data item anda untuk ".$sbu." telah disetujui oleh admin");
+					$this->email->message("Pengajuan data item anda telah disetujui oleh admin");
 					$this->email->send();
 				}
 
@@ -136,7 +136,7 @@ class Item extends CI_Controller
 					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Item Disetujui');
-					$this->email->message("Pengajuan data item anda untuk ".$sbu." tidak disetujui oleh admin");
+					$this->email->message("Pengajuan data item anda tidak disetujui oleh admin");
 					$this->email->send();
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
