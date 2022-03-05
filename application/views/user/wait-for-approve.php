@@ -30,6 +30,7 @@
                                             <input style="padding: 5px" type="submit" name="setuju" value="Setujui" class="btn btn-success ">
                                         <?php endif ?>
                                         <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
+                                        <input style="padding: 5px" name="cetak" value="Cetak"  type="submit" class="btn bg-pink ">
                                     </div>
                                 </div>
                             <div class="">
@@ -39,12 +40,11 @@
                                             <th>NO</th>
                                             <th></th>
                                             <th>Status by Admin</th>
-                                            <th>Status by Procurement</th>
                                             <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
                                             <th>Kategori Supplier</th>
-                                            <th>Detail</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -53,12 +53,11 @@
                                             <th>NO</th>
                                             <th></th>
                                             <th>Status by Admin</th>
-                                            <th>Status by Procurement</th>
                                             <th>Status by Finance</th>
+                                            <th>Status by Procurement</th>
                                             <th>Nama Requester</th>
                                             <th>Asal SBU</th>
                                             <th>Kategori Supplier</th>
-                                            <th>Detail</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -75,6 +74,17 @@
                                                 <label for="basic_checkbox_<?=$ip++?>"></label>
                                                 </form>
                                             </td>
+                                            <td>
+                                                    <?php if ($s->status=='1') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
+                                                         <?php } ?>
+                                                         <?php if ($s->status=='0') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
+                                                         <?php } ?>
+                                                          <?php if ($s->status=='2') { ?>
+                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
+                                                         <?php } ?>
+                                                </td>
                                                 <td>
                                                     <?php if ($s->status_finance=='1') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
@@ -83,17 +93,6 @@
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
                                                          <?php } ?>
                                                           <?php if ($s->status_finance=='2') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
-                                                         <?php } ?>
-                                                </td>
-                                                <td>
-                                                    <?php if ($s->status=='1') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
-                                                         <?php } ?>
-                                                         <?php if ($s->status=='0') { ?>
-                                                         <button style=" padding : 5px !important" href="" type="button" class="btn btn-warning ">PROGRES</button>
-                                                         <?php } ?>
-                                                          <?php if ($s->status=='2') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-danger ">TIDAK DISETUJUI</button>
                                                          <?php } ?>
                                                 </td>
@@ -122,7 +121,6 @@
                                                         Detail
                                                     </a>
                                                 </td>
-                                                <td></td>
                                         </tr>
                                     <?php }?>
                                     </tbody>
