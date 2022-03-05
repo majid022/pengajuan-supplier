@@ -197,6 +197,20 @@ class Approval extends CI_Controller
 
     public function approve_multi($afterAcc = null)
     {
+    	// Konfigurasi email
+		$config = [
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'protocol'  => 'smtp',
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_user' => 'kalla.group02@gmail.com',
+			'smtp_pass'   => 'k@llagroup02',
+			'smtp_crypto' => 'ssl',
+			'smtp_port'   => 465,
+			'crlf'    => "\r\n",
+			'newline' => "\r\n"
+		];
+
     	if($this->input->post('setuju')){
 			$id_pengajuan = $this->input->post('pengajuan');
 			if(is_null($id_pengajuan)){
@@ -223,7 +237,19 @@ class Approval extends CI_Controller
 						$where = array(
 							'id_pengajuan' => $row,
 							'status' => 1,
-						);	
+						);
+
+						$data = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data supplier anda telah disetujui oleh finance");
+						$this->email->send();
 					}
 					else {
 						$data = array(
@@ -235,8 +261,19 @@ class Approval extends CI_Controller
 							'id_pengajuan' => $row,
 							'status' => 1,
 						);
+
+						$data = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data supplier anda telah disetujui oleh procurementd");
+						$this->email->send();
 					}
-					$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -275,6 +312,18 @@ class Approval extends CI_Controller
 								'status' => 1,
 								'status_finance' => 1
 							);
+
+							$data = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+
+							$email = $data[0]['email'];	
+							$sbu = $data[0]['asal_sbu'];
+							$this->load->library('email');
+							$this->email->initialize($config);
+							$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+							$this->email->to($email);
+							$this->email->subject('Pengajuan Supplier Disetujui');
+							$this->email->message("Pengajuan data supplier anda tidak disetujui oleh finance");
+							$this->email->send();
 						}
 						else {
 							$data = array(
@@ -286,8 +335,19 @@ class Approval extends CI_Controller
 								'id_pengajuan'=>$row,
 								'status' => 1,
 							);
+
+							$data = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
+
+							$email = $data[0]['email'];	
+							$sbu = $data[0]['asal_sbu'];
+							$this->load->library('email');
+							$this->email->initialize($config);
+							$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+							$this->email->to($email);
+							$this->email->subject('Pengajuan Supplier Disetujui');
+							$this->email->message("Pengajuan data supplier anda tidak disetujui oleh procurementd");
+							$this->email->send();
 						}
-						$this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 
 						$dataku = $this->Model_pengajuan->update_data($where,$data,'tb_pengajuan');
 						

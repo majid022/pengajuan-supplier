@@ -421,6 +421,20 @@ class Suplier extends CI_Controller {
 		}
 	}
 	function multipel_supplier($afterAcc = null){
+		// Konfigurasi email
+		$config = [
+			'mailtype'  => 'html',
+			'charset'   => 'utf-8',
+			'protocol'  => 'smtp',
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_user' => 'kalla.group02@gmail.com',
+			'smtp_pass'   => 'k@llagroup02',
+			'smtp_crypto' => 'ssl',
+			'smtp_port'   => 465,
+			'crlf'    => "\r\n",
+			'newline' => "\r\n"
+		];
+
 		if($this->input->post('setuju')){
 			$id_item = $this->input->post('item');
 			if(is_null($id_item)){
@@ -443,6 +457,21 @@ class Suplier extends CI_Controller {
 							'status_finance' => 1,
 							'tgl_finance' => date('Y-m-d')
 						);
+
+						$where = array(
+							'id_item' =>$item
+						);
+						$data = $this->Model_item->update_data($where,$data,'tb_item');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data item anda telah disetujui oleh finance");
+						$this->email->send();
 					}
 					else {
 						$data = array(
@@ -450,11 +479,22 @@ class Suplier extends CI_Controller {
 							'status_procurement' => 1,
 							'tgl_procurementd' => date('Y-m-d')
 						);
+
+						$where = array(
+							'id_item' =>$item
+						);
+						$data = $this->Model_item->update_data($where,$data,'tb_item');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data item anda telah disetujui oleh procurement");
+						$this->email->send();
 					}
-					$where = array(
-						'id_item' =>$item
-					);
-					$this->Model_item->update_data($where,$data,'tb_item');
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-green alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -491,6 +531,24 @@ class Suplier extends CI_Controller {
 							'status_finance' => 2,
 							'tgl_finance' => date('Y-m-d')
 						);
+
+						$where = array(
+							'id_item' =>$item,
+							'status' => 1
+						);
+
+						$data = $this->Model_item->update_data($where,$data,'tb_item');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data item anda tidak disetujui oleh finance");
+						$this->email->send();
+
 					}
 					else {
 						$data = array(
@@ -498,13 +556,24 @@ class Suplier extends CI_Controller {
 							'status_procurement' => 2,
 							'tgl_procurementd' => date('Y-m-d')
 						);
-					}
-					$where = array(
-						'id_item' =>$item,
-						'status' => 1
-					);
 
-					$this->Model_item->update_data($where,$data,'tb_item');
+						$where = array(
+							'id_item' =>$item,
+							'status' => 1
+						);
+						
+						$data = $this->Model_item->update_data($where,$data,'tb_item');
+
+						$email = $data[0]['email'];	
+						$sbu = $data[0]['asal_sbu'];
+						$this->load->library('email');
+						$this->email->initialize($config);
+						$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
+						$this->email->to($email);
+						$this->email->subject('Pengajuan Supplier Disetujui');
+						$this->email->message("Pengajuan data item anda tidak disetujui oleh procurement");
+						$this->email->send();
+					}
 				}
 				$this->session->set_flashdata('message', '<div class="alert bg-red alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
