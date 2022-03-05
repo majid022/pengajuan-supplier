@@ -131,9 +131,9 @@
                             </thead>
                         </table>
                         <?php if($this->session->sidebar == 'admin') { ?>
-                            <a href="<?= base_url('admin/approval_supplier/') ?>" class="btn btn-primary">Kembali</a>
+                            <a href="javascript:window.history.back();" class="btn btn-primary">Kembali</a>
                         <?php } else { ?>
-                            <a href="<?= base_url('user/approval/') ?>" class="btn btn-primary">Kembali</a>
+                            <a href="javascript:window.history.back();" class="btn btn-primary">Kembali</a>
                         <?php } ?>
                     </div>
                 </div>

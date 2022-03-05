@@ -138,7 +138,7 @@
                                 </tr> -->
                             </thead>
                         </table>
-                        <a href="<?= base_url('admin/supplier/') ?>" class="btn btn-primary">Kembali</a>
+                        <a href="javascript:window.history.back();" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>
