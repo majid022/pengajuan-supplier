@@ -94,7 +94,7 @@ class Item extends CI_Controller
 					$sbu = $data[0]['asal_sbu'];
 					$this->load->library('email');
 					$this->email->initialize($config);
-					$this->email->from('kalla.group02@gmail.com', 'kalla-group.com');
+					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Item Disetujui');
 					$this->email->message("Pengajuan data item anda untuk ".$sbu." telah disetujui oleh admin");
@@ -133,7 +133,7 @@ class Item extends CI_Controller
 					$sbu = $data[0]['asal_sbu'];
 					$this->load->library('email');
 					$this->email->initialize($config);
-					$this->email->from('kalla.group02@gmail.com', 'kalla-group.com');
+					$this->email->from('kalla.group02@gmail.com', 'masterdata-analis.com');
 					$this->email->to($email);
 					$this->email->subject('Pengajuan Item Disetujui');
 					$this->email->message("Pengajuan data item anda untuk ".$sbu." tidak disetujui oleh admin");
