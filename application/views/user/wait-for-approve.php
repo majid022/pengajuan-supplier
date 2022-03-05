@@ -25,18 +25,19 @@
                         <form action="<?=$url?>" method="post">
                         <div class="body">
                                 <div class="row">
-                                    <!-- <div class="col-md-12">
+                                    <div class="col-md-12">
                                         <?php if($allow_approved) : ?>
                                             <input style="padding: 5px" type="submit" name="setuju" value="Setujui" class="btn btn-success ">
                                         <?php endif ?>
                                         <input style="padding: 5px" name="tidak" value="Tidak Setuju" type="submit" class="btn btn-danger ">
-                                    </div> -->
+                                    </div>
                                 </div>
                             <div class="">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
+                                            <th></th>
                                             <th>Status by Admin</th>
                                             <th>Status by Procurement</th>
                                             <th>Status by Finance</th>
@@ -50,6 +51,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>NO</th>
+                                            <th></th>
                                             <th>Status by Admin</th>
                                             <th>Status by Procurement</th>
                                             <th>Status by Finance</th>
@@ -68,11 +70,11 @@
                                     ?>
                                         <tr>
                                             <td><?=$no++?></td>
-                                            <!-- <td>
+                                            <td>
                                                 <input type="checkbox" id="basic_checkbox_<?=$ik++?>" name="pengajuan[]" value="<?=$s->id_pengajuan?>" class="filled-in">
                                                 <label for="basic_checkbox_<?=$ip++?>"></label>
                                                 </form>
-                                            </td> -->
+                                            </td>
                                                 <td>
                                                     <?php if ($s->status_finance=='1') { ?>
                                                          <button style=" padding : 5px !important" href="" type="button" class="btn btn-success ">DISETUJUI</button>
