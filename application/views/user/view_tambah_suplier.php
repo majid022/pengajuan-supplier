@@ -213,7 +213,7 @@
                                             <select name="kategori" id="kategori" class="form-control show-tick" data-size="10" data-live-search="true">
                                                 <option value="">-- Pilih Kategori --</option>
                                                 <?php foreach($kategori as $k){?>
-                                                <option value="<?=$k->alternate?>"><?=$k->kategori?></option>
+                                                <option value="<?=$k->id_kategori?>"><?=$k->kategori_nama?></option>
                                                 <?php }?>
                                             </select>
                                         </div>

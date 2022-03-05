@@ -119,6 +119,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <a href="<?= base_url('user/item/') ?>" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>

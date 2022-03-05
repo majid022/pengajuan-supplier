@@ -24,7 +24,7 @@
                         <form action="<?=base_url('user/suplier/multipel_supplier')?>" method="post">
                         <div class="body">
                             
-                            <div class="">
+                            <div class="table">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
@@ -36,6 +36,7 @@
                                             <th>Asal SBU</th>
                                             <th>Tanggal Daftar</th>
                                             <th>Kategori Supplier</th>
+                                            <th>Detail</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -49,6 +50,7 @@
                                             <th>Asal SBU</th>
                                             <th>Tanggal Daftar</th>
                                             <th>Kategori Supplier</th>
+                                            <th>Detail</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -108,6 +110,7 @@
                                                         Detail
                                                     </a>
                                                 </td>
+                                                <td></td>
                                         </tr>
                                     <?php }?>
                                     </tbody>

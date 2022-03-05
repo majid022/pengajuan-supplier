@@ -130,6 +130,7 @@
                                 </tr> -->
                             </thead>
                         </table>
+                        <a href="<?= base_url('user/approval/') ?>" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>

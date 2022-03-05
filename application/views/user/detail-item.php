@@ -111,6 +111,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <a href="<?= base_url('user/approval_item/') ?>" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>
