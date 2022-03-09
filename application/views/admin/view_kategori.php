@@ -43,7 +43,7 @@
                                     ?>
                                         <tr>
                                             <td><?=$no++?></td>
-                                            <td><?=$k->kategori?></td>
+                                            <td><?=$k->kategori_nama ?></td>
                                             <td><?=$k->alternate?></td>
                                             <td><?=$k->tgl?></td>
                                             <td align="center">
